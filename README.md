@@ -7,3 +7,4 @@ Goals of this reimplementation:
 - Extend lineage estimation to all isolates
 - Compare extended lineage with phenotype results for all isolates
 - Compare MLST results with phenotype results for all isolates
+- Include ceftazidime, pip/tazo, gentamicin, imipenem, amikacin, amp/sulbactam, trimeth/sulfa, ciprofloxacin, cefepime in phenotype results
