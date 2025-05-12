@@ -1,0 +1,7 @@
+{
+    "output_dir" : "/fs/cbcb-lab/mpop/projects/Acinetobacter_followup",
+    "drug_filtered" : "/fs/cbcb-lab/mpop/projects/Acinetobacter/wgs_srr_drug_filtered.cvs",
+    "accession_list" : "accession_list.csv",
+    "biosample_list" : "biosample_list.csv",
+    "phenotype_clsi" : "phenotype_clsi_std.csv"
+}

@@ -1,0 +1,24 @@
+default-resources:
+  - runtime=60
+  - mem_mb=16000
+  - slurm_partition=cbcb
+  - slurm_account=cbcb
+  - tasks=1
+  - nodes=1
+  - cpus_per_task=1
+set-threads:
+  spades_assembly: 8
+set-resources:
+  spades_assembly:
+    runtime: 180
+    mem_mb: 64000
+    cpus_per_task: 8
+conda-frontend: mamba
+directory: workdir/
+drop-metadata: True
+executor: slurm
+jobs: 30
+keep-going: True
+rerun-incomplete: True
+restart-times: 0
+use-conda: True
