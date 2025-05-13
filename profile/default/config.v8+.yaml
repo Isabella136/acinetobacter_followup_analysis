@@ -13,12 +13,17 @@ set-resources:
     runtime: 180
     mem_mb: 64000
     cpus_per_task: 8
+  create_acb_complex_protein_database:
+    runtime: 60
+    mem_mb: 64000
+    cpus_per_task: 8
 conda-frontend: mamba
 directory: workdir/
 drop-metadata: True
 executor: slurm
 jobs: 30
 keep-going: True
+latency-wait: 30
 rerun-incomplete: True
 restart-times: 0
 use-conda: True

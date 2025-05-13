@@ -23,6 +23,16 @@ rule all:
             run = run_accessions
         ),
 
+        # Predicted genes
+        expand(
+            expand(
+                "{prefix}/{{biosample}}/{{run}}/prokka_results.tsv",
+                prefix = config["output_dir"]),
+            zip,
+            biosample = biosamples,
+            run = run_accessions
+        ),
+
         # mlst
         "/".join((config["output_dir"], "abaumannii_mlst.tsv")),
 
@@ -100,3 +110,52 @@ rule mlst_analysis:
         cd {params}
         mlst */*/contigs.fasta > {output}
         """
+
+rule get_acb_complex_proteins:
+    input: "/".join((workflow.basedir, "gene_id.txt"))
+
+    output: "proteins.fasta"
+
+    conda: "envs/ncbi-downloads.yaml"
+
+    shell: """
+        datasets download gene gene-id --inputfile {input} \
+        --include protein --filename proteins.zip
+
+        unzip -q proteins.zip -d proteins
+        rm proteins.zip
+
+        mv proteins/ncbi_dataset/data/* proteins/
+        rm -r proteins/*/
+
+        cat proteins/*.faa > {output}
+        rm -r proteins/
+        """
+
+rule create_acb_complex_protein_database:
+    input: rules.get_acb_complex_proteins.output
+
+    output: "protein_database.fasta"
+
+    conda: "envs/cd-hit.yaml"
+
+    resources:
+        slurm_extra = "--qos=high"
+
+    shell: "cd-hit -i {input} -o {output} -s 0.8 -M 64000 -T {threads}"
+
+rule sample_gene_prediction:
+    input: 
+        db = rules.create_acb_complex_protein_database.output,
+        ct = rules.spades_assembly.output
+
+    params: 
+        outdir = "/".join((config["output_dir"], "{biosample}/{run}")),
+        prefix = "prokka_results"
+
+    output: "/".join((config["output_dir"], "{biosample}/{run}/prokka_results.tsv"))
+
+    conda: "envs/prokka.yaml"
+
+    shell: "prokka --proteins {input.db} --outdir {params.outdir} \
+        --prefix {params.prefix} {input.ct}"
