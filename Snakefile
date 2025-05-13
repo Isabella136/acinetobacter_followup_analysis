@@ -26,7 +26,7 @@ rule all:
         # Predicted genes
         expand(
             expand(
-                "{prefix}/{{biosample}}/{{run}}/prokka_results.tsv",
+                "{prefix}/{{biosample}}/{{run}}/prokka/results.tsv",
                 prefix = config["output_dir"]),
             zip,
             biosample = biosamples,
@@ -150,12 +150,12 @@ rule sample_gene_prediction:
         ct = rules.spades_assembly.output
 
     params: 
-        outdir = "/".join((config["output_dir"], "{biosample}/{run}")),
-        prefix = "prokka_results"
+        outdir = "/".join((config["output_dir"], "{biosample}/{run}/prokka")),
+        prefix = "results"
 
-    output: "/".join((config["output_dir"], "{biosample}/{run}/prokka_results.tsv"))
+    output: "/".join((config["output_dir"], "{biosample}/{run}/prokka/results.tsv"))
 
     conda: "envs/prokka.yaml"
 
-    shell: "prokka --proteins {input.db} --outdir {params.outdir} \
+    shell: "prokka --proteins {input.db} --outdir {params.outdir} --force\
         --prefix {params.prefix} {input.ct}"
