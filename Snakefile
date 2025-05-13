@@ -27,7 +27,7 @@ rule all:
         "/".join((config["output_dir"], "abaumannii_mlst.tsv")),
 
 rule make_sample_dir:
-    output: temp("{biosample}/text.txt")
+    output: temp("biosample/{biosample}/text.txt")
 
     shell: "mkdir -p {wildcards.biosample} | cd {wildcards.biosample} | touch {output}"
 
@@ -79,7 +79,9 @@ rule spades_assembly:
     resources:
         slurm_extra = "--qos=high"
 
-    shell: "spades.py -1 {input[0]} -2 {input[1]} -o {params} -t {threads}"
+    shell: """
+        spades.py -1 {input[0]} -2 {input[1]} -o {params} -t {threads} || \
+        spades.py -1 {input[0]} -2 {input[1]} -o {params} -t {threads} --phred-offset 33"""
 
 rule mlst_analysis:
     input: 
@@ -96,5 +98,5 @@ rule mlst_analysis:
 
     shell: """
         cd {params}
-        mlst */contigs.fasta > {output}
+        mlst */*/contigs.fasta > {output}
         """
