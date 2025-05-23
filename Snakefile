@@ -23,18 +23,11 @@ rule all:
             run = run_accessions
         ),
 
-        # Predicted genes
-        expand(
-            expand(
-                "{prefix}/{{biosample}}/{{run}}/prokka/results.tsv",
-                prefix = config["output_dir"]),
-            zip,
-            biosample = biosamples,
-            run = run_accessions
-        ),
-
         # mlst
         "/".join((config["output_dir"], "abaumannii_mlst.tsv")),
+
+        # roary
+        "/".join((config["output_dir"], "roary/summary_statistics.txt")),
 
 rule make_sample_dir:
     output: temp("biosample/{biosample}/text.txt")
@@ -80,9 +73,9 @@ rule get_runs:
 rule spades_assembly:
     input: rules.get_runs.output
 
-    params: "/".join((config["output_dir"], "{biosample}/{run}"))
+    params: "/".join((config["output_dir"], "{biosample}/{run}/spades"))
 
-    output: "/".join((config["output_dir"], "{biosample}/{run}/contigs.fasta"))
+    output: "/".join((config["output_dir"], "{biosample}/{run}/spades/contigs.fasta"))
 
     conda: "envs/assembly.yaml"
 
@@ -95,7 +88,7 @@ rule spades_assembly:
 
 rule mlst_analysis:
     input: 
-        expand("/fs/cbcb-lab/mpop/projects/Acinetobacter_followup/{bio}/{run}/contigs.fasta",
+        expand("../../{bio}/{run}/spades/contigs.fasta",
             zip,
             run=run_accessions,
             bio=biosamples)
@@ -151,11 +144,34 @@ rule sample_gene_prediction:
 
     params: 
         outdir = "/".join((config["output_dir"], "{biosample}/{run}/prokka")),
-        prefix = "results"
+        prefix = "{biosample}_{run}_results"
 
-    output: "/".join((config["output_dir"], "{biosample}/{run}/prokka/results.tsv"))
+    output: "/".join((config["output_dir"], "{biosample}/{run}/prokka/{biosample}_{run}_results.gff"))
 
     conda: "envs/prokka.yaml"
 
     shell: "prokka --proteins {input.db} --outdir {params.outdir} --force\
         --prefix {params.prefix} {input.ct}"
+
+rule pangenome_estimation:
+    input:
+        expand("../../{bio}/{run}/prokka/{bio}_{run}_results.gff",
+            zip,
+            run=run_accessions,
+            bio=biosamples)
+
+    params: config["output_dir"]
+
+    output: "/".join((config["output_dir"], "roary/summary_statistics.txt"))
+
+    conda: "envs/roary.yaml"
+
+    resources:
+        slurm_extra = "--qos=high"
+
+    shell: """
+        cd {params}
+        rm -r roary || true
+        roary -p {threads} -f roary -i 85 -s SAMN*/SRR*/prokka/*_results.gff
+        mv roary_* roary
+        """

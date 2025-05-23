@@ -17,6 +17,10 @@ set-resources:
     runtime: 60
     mem_mb: 64000
     cpus_per_task: 8
+  pangenome_estimation:
+    runtime: 180
+    mem_mb: 64000
+    cpus_per_task: 16
 conda-frontend: mamba
 directory: workdir/
 drop-metadata: True
