@@ -1,0 +1,320 @@
+Centroid ID	Annotation
+542670	3-hydroxyl-CoA	dehydrogenase, NAD binding domain protein
+718301	ABC transporter family protein
+788064	ABC transporter family protein
+713469	acetyltransferase family protein
+317070	acyl-CoA dehydrogenase, C-terminal domain protein
+185135	addiction module toxin, Txe/YoeB family
+789727	addiction module toxin, Txe/YoeB family
+412733	alkylhydroperoxidase AhpD family core domain protein
+567900	ankyrin repeats family protein
+507216	antitoxin of toxin-antitoxin stability system N-terminal family protein
+789906	BAAT / Acyl-CoA thioester hydrolase C terminal family protein
+788057	bacterial extracellular solute-binding, 5 Middle family protein
+241962	bacterial regulatory , Fis family protein
+100555	bacterial transcriptional regulator family protein
+718475	beta-lactamase family protein
+104037	binding-protein-dependent transport system inner membrane component family protein
+335056	capsular exopolysaccharide family domain protein
+630564	capsular exopolysaccharide family domain protein
+252121	citrate transporter family protein
+475293	class II Aldolase and Adducin N-terminal domain protein
+100552	coA-transferase III family protein
+254612	cobQ/CobB/MinD/ParA nucleotide binding domain protein
+583453	cobQ/CobB/MinD/ParA nucleotide binding domain protein
+628837	cobQ/CobB/MinD/ParA nucleotide binding domain protein
+104171	conserved hypothetical protein
+104507	conserved hypothetical protein
+104696	conserved hypothetical protein
+142532	conserved hypothetical protein
+1666	conserved hypothetical protein
+1668	conserved hypothetical protein
+184601	conserved hypothetical protein
+185111	conserved hypothetical protein
+185121	conserved hypothetical protein
+186609	conserved hypothetical protein
+306889	conserved hypothetical protein
+314867	conserved hypothetical protein
+319433	conserved hypothetical protein
+320111	conserved hypothetical protein
+320421	conserved hypothetical protein
+357107	conserved hypothetical protein
+359586	conserved hypothetical protein
+398655	conserved hypothetical protein
+413745	conserved hypothetical protein
+443083	conserved hypothetical protein
+456335	conserved hypothetical protein
+475251	conserved hypothetical protein
+490202	conserved hypothetical protein
+490203	conserved hypothetical protein
+490730	conserved hypothetical protein
+505	conserved hypothetical protein
+518449	conserved hypothetical protein
+518469	conserved hypothetical protein
+543458	conserved hypothetical protein
+568439	conserved hypothetical protein
+630646	conserved hypothetical protein
+715066	conserved hypothetical protein
+715650	conserved hypothetical protein
+724834	conserved hypothetical protein
+787821	conserved hypothetical protein
+788739	conserved hypothetical protein
+790527	conserved hypothetical protein
+140781	conserved hypothetical protein
+141573	conserved hypothetical protein
+166152	conserved hypothetical protein
+185113	conserved hypothetical protein
+185123	conserved hypothetical protein
+186057	conserved hypothetical protein
+241959	conserved hypothetical protein
+320060	conserved hypothetical protein
+333448	conserved hypothetical protein
+3381	conserved hypothetical protein
+357069	conserved hypothetical protein
+357091	conserved hypothetical protein
+3747	conserved hypothetical protein
+397861	conserved hypothetical protein
+455257	conserved hypothetical protein
+474942	conserved hypothetical protein
+489718	conserved hypothetical protein
+502088	conserved hypothetical protein
+507208	conserved hypothetical protein
+514787	conserved hypothetical protein
+528051	conserved hypothetical protein
+542183	conserved hypothetical protein
+568442	conserved hypothetical protein
+583673	conserved hypothetical protein
+598672	conserved hypothetical protein
+629797	conserved hypothetical protein
+630523	conserved hypothetical protein
+696465	conserved hypothetical protein
+712596	conserved hypothetical protein
+716754	conserved hypothetical protein
+720074	conserved hypothetical protein
+728419	conserved hypothetical protein
+791500	conserved hypothetical protein
+800887	conserved hypothetical protein
+239443	conserved hypothetical protein
+250287	conserved hypothetical protein
+251703	conserved hypothetical protein
+278194	conserved hypothetical protein
+359303	conserved hypothetical protein
+359307	conserved hypothetical protein
+3712	conserved hypothetical protein
+474851	conserved hypothetical protein
+502194	conserved hypothetical protein
+543186	conserved hypothetical protein
+543323	conserved hypothetical protein
+544801	conserved hypothetical protein
+724820	conserved hypothetical protein
+724832	conserved hypothetical protein
+728417	conserved hypothetical protein
+799897	conserved hypothetical protein
+164772	conserved hypothetical protein
+184523	conserved hypothetical protein
+250296	conserved hypothetical protein
+250297	conserved hypothetical protein
+334967	conserved hypothetical protein
+356957	conserved hypothetical protein
+397552	conserved hypothetical protein
+452339	conserved hypothetical protein
+599256	conserved hypothetical protein
+629584	conserved hypothetical protein
+725126	conserved hypothetical protein
+725127	conserved hypothetical protein
+725128	conserved hypothetical protein
+729519	conserved hypothetical protein
+731317	conserved hypothetical protein
+102316	conserved hypothetical protein
+139362	conserved hypothetical protein
+22726	conserved hypothetical protein
+316762	conserved hypothetical protein
+3383	conserved hypothetical protein
+356250	conserved hypothetical protein
+473666	conserved hypothetical protein
+500453	conserved hypothetical protein
+515887	conserved hypothetical protein
+567955	conserved hypothetical protein
+714714	conserved hypothetical protein
+718443	conserved hypothetical protein
+787713	conserved hypothetical protein
+98949	conserved hypothetical protein
+183351	conserved hypothetical protein
+1941	conserved hypothetical protein
+198593	conserved hypothetical protein
+2535	conserved hypothetical protein
+472599	conserved hypothetical protein
+629710	conserved hypothetical protein
+720052	conserved hypothetical protein
+725155	conserved hypothetical protein
+729518	conserved hypothetical protein
+730454	conserved hypothetical protein
+788238	conserved hypothetical protein
+254666	conserved hypothetical protein
+306307	conserved hypothetical protein
+185117	conserved hypothetical protein
+250282	conserved hypothetical protein
+251003	conserved hypothetical protein
+359582	conserved hypothetical protein
+440778	conserved hypothetical protein
+802051	conserved hypothetical protein
+516412	conserved hypothetical protein
+581735	conserved hypothetical protein
+3418	conserved hypothetical protein
+788495	conserved hypothetical protein
+528223	conserved hypothetical protein
+139033	conserved hypothetical protein
+580784	creatinase
+716596	creatinase
+719454	CRISPR-associated endonuclease Cas1
+318068	CRISPR-associated family protein
+318070	CRISPR-associated family protein
+335618	CRISPR-associated family protein
+502958	CRISPR-associated protein Csy3
+2902	CSLREA domain protein
+102452	curli production assembly/transport component CsgG family protein
+716458	DDE domain protein
+102882	DDE domain protein
+103060	DDE superendonuclease family protein
+336029	DDE superendonuclease family protein
+720264	DDE superendonuclease family protein
+630520	DJ-1/PfpI family protein
+545067	endodeoxyribonuclease RusA family protein
+1673	flagellin N-methylase family protein
+263135	flagellin N-methylase family protein
+713470	glycosyl transferase 1 family protein
+489747	glycosyl transferase 2 family protein
+543160	glycosyl transferases group 1 family protein
+319485	glycosyltransferase 52 family protein
+729524	haemagluttinin repeat family protein
+1669	helix-turn-helix domain protein
+251327	helix-turn-helix domain protein
+183298	helix-turn-helix family protein
+584724	helix-turn-helix family protein
+606027	helix-turn-helix family protein
+542664	HMGL-like family protein
+790797	HNH endonuclease family protein
+629269	homeo-like domain protein
+1670	HTH domain protein
+803867	HTH-like domain protein
+105242	HTH-like domain protein
+359563	hxlR-like helix-turn-helix family protein
+718151	hydrolyase, tartrate alpha subunit/fumarate, Fe-S type domain protein
+453742	hypothetical protein
+500445	hypothetical protein
+594362	hypothetical protein
+257360	hypothetical protein
+2751	hypothetical protein
+715276	hypothetical protein
+3763	hypothetical protein
+399469	hypothetical protein
+440370	hypothetical protein
+699216	hypothetical protein
+257464	insB domain protein
+317823	integrase core domain protein
+799900	integrase domain protein
+106444	integrase domain protein
+358223	L(+)-tartrate dehydratase subunit beta
+335055	low molecular weight protein-tyrosine-phosphatase ptp
+317076	luciferase-like monooxygenase family protein
+333354	luciferase-like	monooxygenase family protein
+239644	lysR substrate binding domain protein
+712670	lysR substrate binding domain protein
+240075	lysR substrate binding domain protein
+518447	macro domain protein
+239648	major Facilitator Superfamily protein
+166893	major Facilitator Superfamily protein
+164751	MJ0042 family finger-like domain protein
+599171	nickel import ATP-binding protein NikE
+475294	NMT1/THI5 like family protein
+718302	NMT1/THI5 like family protein
+1284	outer membrane beta-barrel domain protein
+488398	outer membrane porin, OprD family
+336253	P-loop domain protein
+238902	PAAR motif family protein
+489405	PAAR motif family protein
+313469	PAAR motif family protein
+543324	PAAR motif family protein
+489018	peptidase inhibitor I78 family protein
+716601	phage integrase domain protein
+398653	phage integrase family protein
+103376	phage integrase family protein
+256182	phage integrase family protein
+317782	phage integrase family protein
+413706	phage integrase	family protein
+716771	phage integrase family protein
+333100	phage integrase family protein
+716453	phage integrase family protein
+472126	phage integrase family protein
+98948	phage integrase family protein
+185137	phage integrase family protein
+263231	phage integrase family protein
+359595	phage integrase family protein
+200270	phage integrase
+98820	phage minor tail family protein
+566640	pilus assembly FilF domain protein
+347335	pilus subunit FilA domain protein
+489746	polysaccharide biosynthesis family protein
+335054	polysaccharide biosynthesis/export family protein
+102317	pre-toxin domain with VENN motif family protein
+397737	prokaryotic E2 B family protein
+167071	prophage CP4-57 regulatory family protein
+185133	prophage CP4-57 regulatory family protein
+140775	prophage CP4-57 regulatory family protein
+788056	putative aBC-type dipeptide transport system, periplasmic component
+453548	putative cation efflux system protein
+790957	putative cRISPR-associated helicase Cas3
+583677	putative domain protein
+790958	putative helicase
+472939	putative integrase
+583486	putative integrase
+713233	putative lipoprotein NMB1124/NMB1162
+185122	putative lipoprotein
+732235	putative lipoprotein
+713232	putative lipoprotein
+104698	putative membrane protein
+320113	putative membrane protein
+473624	putative membrane protein
+100811	putative membrane protein
+545040	putative membrane protein
+251438	putative methionine aminopeptidase
+474137	putative methionine aminopeptidase
+629686	putative outer membrane protein
+500455	putative phage-type endonuclease domain protein
+568448	putative phage-type endonuclease domain protein
+472597	putative phage-type endonuclease domain	protein
+240781	putative predicted protein
+254838	putative predicted protein
+356639	putative predicted protein
+440411	putative predicted protein
+544797	putative predicted protein
+607726	putative predicted protein
+101959	putative predicted protein
+250726	RDD family protein
+251440	rhs element Vgr family protein
+488261	rhs element Vgr family protein
+240783	rhs element Vgr family protein
+2134	rhs element Vgr family protein
+473661	rhs element Vgr family protein
+317075	secretory lipase family protein
+595328	sel1 repeat family protein
+543183	sel1 repeat family protein
+542669	sugar (and other) transporter family protein
+333064	terminase-like family protein
+166585	tetratricopeptide repeat family protein
+788066	tonB dependent receptor family protein
+788065	tonB-dependent Receptor Plug domain protein
+453874	transposase DDE domain protein
+336156	transposase family protein
+583352	transposase family protein
+698747	transposase family protein
+320277	transposase family protein
+455336	transposase family protein
+787861	type I secretion C-terminal , TIGR03661 family domain protein
+597260	type VI secretion system Rhs element Vgr family protein
+441712	vacuole effluxer Atg22 like family protein
+473652	WYL domain protein
+595205	WYL domain protein
+488401	xylose isomerase-like TIM barrel family protein
+488402	YCII-related domain protein
+472598	yqaJ-like viral recombinase domain protein

@@ -1,0 +1,9 @@
+Centroid ID	Annotation
+365901	type IV pilin structural subunit
+733161	oxidoreductase , NAD-binding Rossmann fold family protein
+733163	capsule polysaccharide biosynthesis family protein
+74448	glycosyl transferases group 1 family protein
+55125	polysaccharide biosynthesis family protein
+563378	conserved hypothetical protein
+197234	KR domain protein
+197235	cytidylyltransferase family protein
