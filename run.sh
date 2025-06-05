@@ -15,5 +15,4 @@ eval "$(conda shell.bash hook)"
 conda activate snakemake
 
 snakemake --directory workdir --unlock
-snakemake --directory workdir --touch
 snakemake --profile ./profile/default
