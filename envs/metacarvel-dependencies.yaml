@@ -1,0 +1,10 @@
+channels:
+  - anaconda
+  - bioconda
+  - conda-forge
+dependencies:
+  - bedtools
+  - networkx>=2.5
+  - numpy
+  - python
+  - samtools <= 1.15

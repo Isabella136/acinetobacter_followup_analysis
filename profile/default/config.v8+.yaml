@@ -10,7 +10,8 @@ set-threads:
   spades_assembly: 8
   create_acb_complex_protein_database: 8
   pangenome_estimation: 32
-  pangenome_estimation_represeantative_only: 32
+  pangenome_estimation_representative_only: 32
+  align_read_to_contig: 8
 set-resources:
   spades_assembly:
     runtime: 180
@@ -24,10 +25,13 @@ set-resources:
     runtime: 300
     mem_mb: 128000
     cpus_per_task: 32
-  pangenome_estimation_represeantative_only:
+  pangenome_estimation_representative_only:
     runtime: 300
     mem_mb: 128000
     cpus_per_task: 32
+  align_read_to_contig:
+    mem_mb: 128000
+    cpus_per_task: 8
 conda-frontend: mamba
 directory: workdir/
 drop-metadata: True

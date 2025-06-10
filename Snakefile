@@ -29,21 +29,31 @@ rule all:
             run = run_accessions
         ),
 
-        # Alignments
-        expand(
-            "/".join((config["output_dir"], "{biosample}/{run}/card_blast")),
-            zip,
-            biosample = biosamples,
-            run = run_accessions
-        ),
+        # CARD blast
+        "/".join((config["output_dir"], "card_blast_matrix.csv")),
+        "/".join((config["output_dir"], "representative_card_blast_matrix.csv")),
 
-        # Alignments
+        # Wallace blast
+        "/".join((config["output_dir"], "wallace_blast_matrix.csv")),
+        "/".join((config["output_dir"], "representative_wallace_blast_matrix.csv")),
+
+
+        # Read-to-contig Alignments
         expand(
-            "/".join((config["output_dir"], "{biosample}/{run}/wallace_blast")),
+            "biosample/{biosample}/alignment/{run}.bam",
             zip,
             biosample = biosamples,
             run = run_accessions
         ),
+        
+
+        # # metacarvel
+        # expand(
+        #     "/".join((config["output_dir"], "{biosample}/{run}/metacarvel/scaffolds.fa")),
+        #     zip,
+        #     biosample = biosamples,
+        #     run = run_accessions
+        # ),
 
         # mlst
         "/".join((config["output_dir"], "abaumannii_mlst.tsv")),
@@ -89,7 +99,7 @@ rule get_runs:
     conda: "envs/ncbi-downloads.yaml"
 
     shell: """
-        cd {wildcards.biosample}/
+        cd biosample/{wildcards.biosample}/
         mkdir -p reads
         cd reads
         fasterq-dump --split-files {wildcards.run}
@@ -130,15 +140,12 @@ rule mlst_analysis:
             run=run_accessions,
             bio=biosamples)
 
-    params: config["output_dir"]
-
     output: "/".join((config["output_dir"], "abaumannii_mlst.tsv"))
 
     conda: "envs/mlst.yaml"
 
     shell: """
-        cd {params}
-        mlst */*/contigs.fasta > {output}
+        mlst ../../*/*/spades/contigs.fasta > {output}
         """
 
 rule get_acb_complex_proteins:
@@ -188,7 +195,7 @@ rule sample_gene_prediction:
     conda: "envs/prokka.yaml"
 
     shell: "prokka --proteins {input.db} --outdir {params.outdir} --force\
-        --prefix {params.prefix} {input.ct}"
+        --locustag {wildcards.run} --prefix {params.prefix} {input.ct}"
 
 rule reference_gene_prediction:
     input: 
@@ -204,7 +211,7 @@ rule reference_gene_prediction:
     conda: "envs/prokka.yaml"
 
     shell: "prokka --proteins {input.db} --outdir {params.outdir} --force\
-        --prefix {params.prefix} {input.rf}"
+        --locustag reference --prefix {params.prefix} {input.rf}"
 
 rule pangenome_estimation:
     input:
@@ -230,13 +237,31 @@ rule pangenome_estimation:
         mv roary_* roary || true
         """
 
-rule pangenome_estimation_represeantative_only:
+rule symlink_prokka_representative_only:
+    input: rules.sample_gene_prediction.output
+
+    output: "/".join((config["output_dir"], "{biosample}/{run}/prokka/{biosample}_{run}_results.symlink.gff"))
+
+    shell: """
+        ln -srf {input} {output}
+    """
+
+rule symlink_prokka_reference:
+    input: rules.reference_gene_prediction.output
+
+    output: "/".join((config["output_dir"], "reference/CP001921/prokka/ref_results.symlink.gff"))
+
+    shell: """
+        ln -srf {input} {output}
+    """
+
+rule pangenome_estimation_representative_only:
     input:
-        expand("../../{bio}/{run}/prokka/{bio}_{run}_results.gff",
+        expand("../../{bio}/{run}/prokka/{bio}_{run}_results.symlink.gff",
             zip,
             run=representative_run_accessions,
             bio=representative_biosamples),
-        rules.reference_gene_prediction.output
+        rules.symlink_prokka_reference.output
 
     params: config["output_dir"]
 
@@ -250,7 +275,7 @@ rule pangenome_estimation_represeantative_only:
     shell: """
         cd {params}
         rm -r representative_roary || true
-        roary -p {threads} -f representative_roary -i 85 -s -v -e --mafft -n {input}
+        roary -p {threads} -f representative_roary -i 85 -s -v -e --mafft -n */*/prokka/*_results.symlink.gff
         mv representative_roary_* representative_roary || true
         """
 
@@ -265,6 +290,32 @@ rule blast_to_card:
 
     shell: "blastn -query {params} -subject {input} -perc_identity 80.0 -outfmt 6 > {output}"
 
+rule create_card_blast_matrix:
+    input: 
+        blast = expand("../../{bio}/{run}/card_blast",
+            zip,
+            run=run_accessions,
+            bio=biosamples),
+    
+    output: "/".join((config["output_dir"], "card_blast_matrix.csv"))
+
+    conda: "envs/python.yaml"
+
+    shell: "python ../scripts/matrix_creator.py {input.blast} {output}"
+
+rule create_representative_card_blast_matrix:
+    input: 
+        blast = expand("../../{bio}/{run}/card_blast",
+            zip,
+            run=representative_run_accessions,
+            bio=representative_biosamples),
+    
+    output: "/".join((config["output_dir"], "representative_card_blast_matrix.csv"))
+
+    conda: "envs/python.yaml"
+
+    shell: "python ../scripts/matrix_creator.py {input.blast} {output}"
+
 rule blast_to_resistant_wallace:
     input: rules.spades_assembly.output
 
@@ -275,3 +326,69 @@ rule blast_to_resistant_wallace:
     conda: "envs/blast.yaml"
 
     shell: "blastn -query {params} -subject {input} -perc_identity 80.0 -outfmt 6 > {output}"
+
+rule create_wallace_blast_matrix:
+    input: 
+        blast = expand("../../{bio}/{run}/wallace_blast",
+            zip,
+            run=run_accessions,
+            bio=biosamples),
+    
+    output: "/".join((config["output_dir"], "wallace_blast_matrix.csv"))
+
+    conda: "envs/python.yaml"
+
+    shell: "python ../scripts/matrix_creator.py {input.blast} {output}"
+
+rule create_representative_wallace_blast_matrix:
+    input: 
+        blast = expand("../../{bio}/{run}/wallace_blast",
+            zip,
+            run=representative_run_accessions,
+            bio=representative_biosamples),
+    
+    output: "/".join((config["output_dir"], "representative_wallace_blast_matrix.csv"))
+
+    conda: "envs/python.yaml"
+
+    shell: "python ../scripts/matrix_creator.py {input.blast} {output}"
+
+rule align_read_to_contig:
+    input: 
+        read_1 = rules.get_runs.output[1],
+        read_2 = rules.get_runs.output[1],
+        assembly = rules.spades_assembly.output
+
+    output: 
+        first = temp("biosample/{biosample}/alignment/{run}_1.bam"),
+        second = temp("biosample/{biosample}/alignment/{run}_2.bam"),
+        merge = temp("biosample/{biosample}/alignment/{run}_merge.bam"),
+        final = "biosample/{biosample}/alignment/{run}.bam"
+
+    conda: "envs/bowtie.yaml"
+
+    resources:
+        slurm_extra = "--qos=highmem"
+
+    shell: """
+        mkdir -p biosample/{wildcards.biosample}/alignment/
+        bowtie2-build --threads {threads} {input.assembly} {wildcards.run}
+        bowtie2 -p {threads} -x {wildcards.run} -U {input.read_1} | samtools view -bS - | samtools sort - -o {output.first}
+        bowtie2 -p {threads} -x {wildcards.run} -U {input.read_2} | samtools view -bS - | samtools sort - -o {output.second}
+        samtools merge {output.merge} {output.first} {output.second}
+        samtools sort -n {output.merge} -o {output.final}
+        rm {wildcards.run}*
+    """
+# rule build_scaffold:
+#     input:
+#         assembly = rules.spades_assembly.output,
+#         alignment = "biosample/{biosample}/alignment/{run}.bam"
+
+#     params: "/".join((config["output_dir"], "{biosample}/{run}/metacarvel")),
+    
+#     output: "/".join((config["output_dir"], "{biosample}/{run}/metacarvel/scaffolds.fa")),
+
+#     conda: "envs/metacarvel-dependencies.yaml"
+
+#     shell: "python ~/MetaCarvel/run.py -a {input.assembly} -m {input.alignment} -d {params} -k True -b 10"
+
