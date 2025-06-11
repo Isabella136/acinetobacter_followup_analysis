@@ -1,9 +1,12 @@
 {
     "output_dir" : "../..",
-    "drug_filtered" : "../../../projects/Acinetobacter/wgs_srr_drug_filtered.cvs",
+
+    "phenotype_clsi" : "../phenotype_clsi_std.csv",
+    "disk_diffusion" : "../wgs_srr_drug_filtered.tsv",
+
     "accession_list" : "accession_list.csv",
     "biosample_list" : "biosample_list.csv",
-    "phenotype_clsi" : "phenotype_clsi_std.csv",
+
     "representative_accession_list" : "representative_accession_list.csv",
     "representative_biosample_list" : "representative_biosample_list.csv"
 }

@@ -30,13 +30,12 @@ rule all:
         ),
 
         # CARD blast
-        "/".join((config["output_dir"], "card_blast_matrix.csv")),
-        "/".join((config["output_dir"], "representative_card_blast_matrix.csv")),
+        "/".join((config["output_dir"], "card_amr_arg_association.csv")),
+        "/".join((config["output_dir"], "representative_card_amr_arg_association.csv")),
 
         # Wallace blast
-        "/".join((config["output_dir"], "wallace_blast_matrix.csv")),
-        "/".join((config["output_dir"], "representative_wallace_blast_matrix.csv")),
-
+        "/".join((config["output_dir"], "wallace_amr_arg_association.csv")),
+        "/".join((config["output_dir"], "representative_wallace_amr_arg_association.csv")),
 
         # Read-to-contig Alignments
         expand(
@@ -46,7 +45,6 @@ rule all:
             run = run_accessions
         ),
         
-
         # # metacarvel
         # expand(
         #     "/".join((config["output_dir"], "{biosample}/{run}/metacarvel/scaffolds.fa")),
@@ -105,18 +103,6 @@ rule get_runs:
         fasterq-dump --split-files {wildcards.run}
         """   
 
-rule quality_check:
-    input: rules.get_runs.output
-
-    output:
-        fastq_1 = "biosample/{biosample}/reads/{run}_1_fastqc.html",
-        fastq_2 = "biosample/{biosample}/reads/{run}_2_fastqc.html"
-
-    shell: """
-        module load fastqc
-        fastqc biosample/{wildcards.biosample}/reads/*.fastq
-    """
-    
 rule spades_assembly:
     input: rules.get_runs.output
 
@@ -130,8 +116,8 @@ rule spades_assembly:
         slurm_extra = "--qos=high"
 
     shell: """
-        spades.py -1 {input[0]} -2 {input[1]} -o {params} -t {threads} || \
-        spades.py -1 {input[0]} -2 {input[1]} -o {params} -t {threads} --phred-offset 33"""
+        spades.py -1 {input[0]} -2 {input[1]} -o {params} -t {threads} --cov-cutoff 10.0 || \
+        spades.py -1 {input[0]} -2 {input[1]} -o {params} -t {threads} --cov-cutoff 10.0 --phred-offset 33"""
 
 rule mlst_analysis:
     input: 
@@ -352,6 +338,19 @@ rule create_representative_wallace_blast_matrix:
     conda: "envs/python.yaml"
 
     shell: "python ../scripts/matrix_creator.py {input.blast} {output}"
+
+rule calculate_amr_arg_association:
+    input:
+        blast_matrix = "/".join((config["output_dir"], "{prefix}_blast_matrix.csv")),
+        disk_diffusion = config["disk_diffusion"],
+        phenotype_clsi = config["phenotype_clsi"]
+
+    output:
+        "/".join((config["output_dir"], "{prefix}_amr_arg_association.csv")),
+
+    conda: "envs/r.yaml",
+
+    shell: "Rscript ../scripts/amr_arg_association_calculation.R {input.blast_matrix} {input.disk_diffusion} {input.phenotype_clsi} {output}"
 
 rule align_read_to_contig:
     input: 

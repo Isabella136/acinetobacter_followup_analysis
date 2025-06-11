@@ -12,7 +12,10 @@ for i in range(len(blast_output)):
     with open(blast_output[i]) as curr_output:
         runs_list.append(' - '.join(
             (blast_output[i].split('/')[-3], blast_output[i].split('/')[-2])))
-        tsv_handler = pd.read_csv(curr_output, sep='\t')
+        try:
+            tsv_handler = pd.read_csv(curr_output, sep='\t')
+        except:
+            continue
         for row in tsv_handler.iterrows():
             if row[1][0] in matrix_precursor:
                 matrix_precursor[row[1][0]].append(runs_list[-1])
@@ -20,18 +23,18 @@ for i in range(len(blast_output)):
                 genes_list.append(row[1][0])
                 matrix_precursor[row[1][0]] = [runs_list[-1]]
 
-matrix = np.zeros((len(matrix_precursor), len(runs_list)))
+matrix = np.zeros((len(runs_list), len(matrix_precursor)))
 
-for row, (gene, runs) in enumerate(matrix_precursor.items()):
+for col, (gene, runs) in enumerate(matrix_precursor.items()):
     for run in runs:
-        col = runs_list.index(run)
+        row = runs_list.index(run)
         matrix[row][col] = 1
 
 with open(sys.argv[-1], 'w') as matrix_file:
-    matrix_file.write(',' + ','.join(runs_list) + '\n')
+    matrix_file.write(',' + ','.join(genes_list) + '\n')
 
-    for row in range(len(genes_list)):
-        matrix_file.write(genes_list[row])
+    for row in range(len(runs_list)):
+        matrix_file.write(runs_list[row])
         for col in matrix[row] :
             matrix_file.write(',{:.0f}'.format(col))
         matrix_file.write('\n')
